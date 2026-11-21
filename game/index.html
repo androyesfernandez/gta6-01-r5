@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PUERTO CANDELA — an original open-world crime game</title>
+<link rel="stylesheet" href="./style.css">
+<script type="importmap">{"imports": {"three": "./vendor/three.module.min.js"}}</script>
+</head>
+<body>
+<div id="app"></div>
+
+<div id="hud">
+  <div id="hud-top-left" class="panel">
+    <div id="cash">$1,200</div>
+    <div id="rank-chip">RUNNER</div>
+    <div class="bar rankwrap"><div id="rank-bar"></div></div>
+    <div id="district-chip">MALECÓN VIEJO · FRIENDLY</div>
+    <div class="bar healthwrap"><div id="health-bar"></div></div>
+    <div class="bar armourwrap"><div id="armour-bar"></div></div>
+  </div>
+  <div id="hud-top-right">
+    <div id="wanted-stars">☆☆☆☆☆</div>
+    <div id="wanted-state"></div>
+  </div>
+  <div id="dispatch-panel" class="panel" style="display:none">
+    <h3>CPA DISPATCH</h3>
+    <div id="dispatch-rows"></div>
+  </div>
+  <div id="mission-panel" class="panel" style="display:none">
+    <h3 id="mission-title">JOB</h3>
+    <div id="mission-stage">STAGE 1/3</div>
+    <div id="mission-pips"></div>
+    <div id="mission-objective"></div>
+  </div>
+  <canvas id="minimap" width="220" height="220"></canvas>
+  <div id="weapon-slots"></div>
+  <div id="crew-cards"></div>
+  <div id="speedo" style="display:none">0 km/h</div>
+  <div id="vehicle-chip" style="display:none"></div>
+  <div id="radio-ticker">RADIO CANDELA 98.4</div>
+  <div id="banner" style="display:none"></div>
+  <div id="controls-hint">WASD drive/walk · F enter/exit car · mouse drag look · click shoot · Q GETAWAY · E STATIC · Esc pause</div>
+</div>
+
+<div id="dialogue-box" style="display:none">
+  <img id="dialogue-portrait" alt="speaker portrait">
+  <div><div id="dialogue-name">Madre Cande</div><div id="dialogue-text"></div></div>
+</div>
+
+<div id="phone-panel" style="display:none">
+  <img id="phone-portrait" alt="caller portrait">
+  <div id="phone-name">INCOMING</div>
+  <div id="phone-text"></div>
+  <button id="phone-accept">ACCEPT [Y]</button>
+  <button id="phone-decline">DECLINE [N]</button>
+</div>
+
+<div id="garage-panel" class="panel" style="display:none">
+  <h3>PUERTO ALTO GARAGE</h3>
+  <div id="garage-info"></div>
+  <button id="garage-respray">RESPRAY + REPAIR — $300 (clears wanted)</button>
+  <button id="garage-armour">ARMOUR TIER — $900</button>
+  <button id="garage-engine">ENGINE TIER — $1,100</button>
+  <button id="garage-close">CLOSE [Esc]</button>
+</div>
+
+<div id="shop-panel" class="panel" style="display:none"><h3 id="shop-title">SHOP</h3></div>
+
+<div id="title-screen" style="display:none">
+  <h1 id="logotype">PUERTO<br>CANDELA</h1>
+  <div id="title-tagline">An original open-world crime story · keyboard &amp; mouse</div>
+  <div id="title-buttons">
+    <button id="btn-continue">CONTINUE</button>
+    <button id="btn-new">NEW GAME</button>
+    <button id="btn-load">LOAD GAME</button>
+    <button id="btn-settings">SETTINGS</button>
+  </div>
+  <div id="title-slots"></div>
+</div>
+
+<div id="pause-menu" class="panel" style="display:none">
+  <h2>PAUSED — PUERTO CANDELA</h2>
+  <div id="pause-tabs">
+    <button id="tabbtn-map">MAP</button>
+    <button id="tabbtn-stats">STATS</button>
+    <button id="tabbtn-crew">CREW</button>
+    <button id="tabbtn-save">SAVE</button>
+    <button id="btn-resume">RESUME</button>
+  </div>
+  <div id="tab-map"><canvas id="map-canvas" width="640" height="400"></canvas><div id="completion-list"></div></div>
+  <div id="tab-stats" style="display:none"><div id="stats-grid"></div><h3>RANK LADDER</h3><div id="rank-ladder"></div></div>
+  <div id="tab-crew" style="display:none"><div id="crew-tab-list"></div></div>
+  <div id="tab-save" style="display:none"><div id="save-slots"></div></div>
+</div>
+
+<div id="wasted-overlay" class="overlay" style="display:none"><h1>WASTED</h1><p>Ruy wakes up at the harbour clinic. The port keeps turning.</p><button id="wasted-respawn">RESPAWN [R]</button></div>
+<div id="busted-overlay" class="overlay" style="display:none"><h1>BUSTED</h1><p>The CPA takes its cut. Walk it off, wheelman.</p><button id="busted-respawn">CONTINUE [R]</button></div>
+
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>

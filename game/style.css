@@ -1,0 +1,87 @@
+/* PUERTO CANDELA — one art direction: dark translucent panels, amber highlights, coral/teal accents. */
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: #1a1210; font-family: 'Segoe UI', Arial, sans-serif; color: #f5ead6; }
+#app, #app canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+.panel { background: rgba(16, 14, 20, 0.78); border: 1px solid rgba(232, 176, 75, 0.55); border-radius: 8px; padding: 8px 10px; }
+.panel h3 { margin: 0 0 5px; font-size: 14px; letter-spacing: 1px; color: #e8b04b; }
+button { background: #2e2a33; color: #f5ead6; border: 1px solid #e8b04b; border-radius: 6px; padding: 7px 14px; font-size: 14px; cursor: pointer; }
+button:hover { background: #e8b04b; color: #1a1410; }
+#hud { position: fixed; inset: 0; pointer-events: none; z-index: 5; }
+#hud-top-left { position: absolute; top: 10px; left: 10px; min-width: 190px; }
+#cash { font-size: 22px; font-weight: bold; color: #ffd94b; }
+#rank-chip { font-size: 14px; font-weight: bold; color: #7ae8d9; letter-spacing: 1px; }
+#district-chip { font-size: 13px; color: #f0c9a0; margin: 3px 0; }
+.bar { height: 8px; background: rgba(255,255,255,0.15); border-radius: 4px; margin: 4px 0; overflow: hidden; }
+.bar > div { height: 100%; transition: width 0.2s; }
+#health-bar { background: #d95f6e; width: 100%; }
+#armour-bar { background: #5a7ad9; width: 50%; }
+#rank-bar { background: #e8b04b; width: 0%; }
+#hud-top-right { position: absolute; top: 10px; right: 12px; text-align: right; }
+#wanted-stars { font-size: 26px; color: #666; text-shadow: 0 2px 4px #000; }
+#wanted-state { font-size: 13px; font-weight: bold; color: #ff9a8a; }
+#dispatch-panel { position: absolute; top: 64px; right: 10px; width: 240px; }
+.drow { display: flex; justify-content: space-between; font-size: 13px; padding: 2px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.drow b { color: #9fc2ff; } .drow span { color: #ffd97a; } .drow em { color: #bbb; font-style: normal; }
+#mission-panel { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 320px; text-align: center; }
+#mission-title { font-size: 16px; }
+#mission-stage { font-size: 13px; color: #7ae8d9; font-weight: bold; }
+#mission-pips { color: #e8b04b; font-size: 14px; letter-spacing: 3px; }
+#mission-objective { font-size: 14px; font-weight: bold; color: #fff; }
+#minimap { position: absolute; left: 10px; bottom: 10px; width: 220px; height: 220px; border: 2px solid rgba(232,176,75,0.7); border-radius: 8px; background: #17303a; }
+#weapon-slots { position: absolute; right: 10px; bottom: 118px; display: flex; flex-direction: column; gap: 4px; }
+.weapon-slot { background: rgba(16,14,20,0.78); border: 1px solid rgba(255,255,255,0.25); border-radius: 6px; padding: 4px 8px; font-size: 13px; }
+.weapon-slot.active { border-color: #e8b04b; color: #ffd94b; font-weight: bold; }
+.weapon-slot.locked { opacity: 0.55; }
+#crew-cards { position: absolute; right: 10px; bottom: 10px; display: flex; gap: 6px; }
+.crew-card { position: relative; background: rgba(16,14,20,0.82); border: 1px solid rgba(122,232,217,0.5); border-radius: 8px; padding: 6px 9px; font-size: 13px; overflow: hidden; min-width: 128px; }
+.crew-card b { display: block; color: #7ae8d9; font-size: 14px; }
+.crew-card span { display: block; color: #ccc; font-size: 12px; }
+.crew-card em { font-style: normal; color: #ffd94b; font-size: 12px; font-weight: bold; }
+.crew-card .cd { position: absolute; left: 0; bottom: 0; height: 4px; background: #e07a3f; width: 0%; }
+.crew-card.ready { border-color: #ffd94b; }
+.crew-card.highlight { outline: 3px solid #ffd94b; }
+#speedo { position: absolute; right: 14px; bottom: 240px; font-size: 30px; font-weight: bold; color: #fff; text-shadow: 0 2px 6px #000; }
+#vehicle-chip { position: absolute; right: 14px; bottom: 218px; font-size: 13px; font-weight: bold; color: #ffd97a; text-shadow: 0 1px 4px #000; }
+#radio-ticker { position: absolute; left: 50%; transform: translateX(-50%); bottom: 8px; font-size: 13px; color: #f0c9a0; background: rgba(16,14,20,0.65); padding: 3px 12px; border-radius: 10px; white-space: nowrap; }
+#banner { position: absolute; top: 22%; left: 50%; transform: translateX(-50%); font-size: 26px; font-weight: bold; letter-spacing: 2px; color: #ffd94b; text-shadow: 0 3px 8px #000; text-align: center; white-space: nowrap; }
+#controls-hint { position: absolute; left: 240px; bottom: 10px; font-size: 12px; color: rgba(255,255,255,0.75); text-shadow: 0 1px 3px #000; }
+#dialogue-box { position: fixed; left: 240px; bottom: 44px; z-index: 8; display: flex; gap: 10px; align-items: center; background: rgba(16,14,20,0.88); border: 1px solid #e8b04b; border-radius: 10px; padding: 8px 12px; max-width: 430px; }
+#dialogue-box img, #phone-panel img { width: 56px; height: 56px; border-radius: 8px; border: 2px solid #e8b04b; }
+#dialogue-name { font-size: 14px; font-weight: bold; color: #e8b04b; }
+#dialogue-text { font-size: 14px; }
+#phone-panel { position: fixed; top: 90px; left: 10px; z-index: 8; background: rgba(16,14,20,0.9); border: 1px solid #7ae8d9; border-radius: 10px; padding: 10px; width: 270px; }
+#phone-name { font-size: 14px; font-weight: bold; color: #7ae8d9; margin: 5px 0; }
+#phone-text { font-size: 13px; margin-bottom: 8px; }
+#garage-panel { position: fixed; top: 120px; left: 50%; transform: translateX(-50%); z-index: 9; width: 330px; display: flex; flex-direction: column; gap: 6px; }
+#garage-panel button { pointer-events: auto; }
+#shop-panel { position: fixed; bottom: 250px; left: 10px; z-index: 8; }
+#title-screen { position: fixed; inset: 0; z-index: 20; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(180deg, rgba(20,10,10,0.25), rgba(20,10,16,0.72)); }
+#logotype { font-family: Impact, 'Arial Narrow Bold', sans-serif; font-size: 92px; line-height: 0.92; text-align: center; margin: 0; color: #ffd94b; letter-spacing: 4px; text-shadow: 0 6px 0 #b03a2e, 0 12px 28px rgba(0,0,0,0.8); }
+#title-tagline { font-size: 16px; margin: 12px 0 20px; color: #ffe9c9; text-shadow: 0 2px 5px #000; }
+#title-buttons { display: flex; gap: 10px; }
+#title-buttons button { font-size: 17px; font-weight: bold; padding: 10px 22px; }
+#title-slots { display: flex; gap: 10px; margin-top: 22px; }
+.slotcard { background: rgba(16,14,20,0.85); border: 1px solid rgba(232,176,75,0.6); border-radius: 8px; padding: 8px 12px; font-size: 13px; min-width: 170px; }
+.slotcard b { display: block; color: #e8b04b; font-size: 14px; }
+.slotcard span { display: block; margin: 3px 0; }
+#pause-menu { position: fixed; top: 3vh; left: 50%; transform: translateX(-50%); z-index: 15; width: min(700px, 94vw); max-height: 94vh; overflow-y: auto; }
+#pause-menu h2 { margin: 2px 0 8px; font-size: 20px; color: #ffd94b; letter-spacing: 1px; }
+#pause-tabs { display: flex; gap: 6px; margin-bottom: 10px; }
+#pause-tabs button.active { background: #e8b04b; color: #1a1410; font-weight: bold; }
+#map-canvas { width: 100%; border: 1px solid rgba(232,176,75,0.5); border-radius: 6px; }
+#completion-list { font-size: 14px; margin-top: 8px; line-height: 1.7; }
+#stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px 18px; }
+.stat { display: flex; justify-content: space-between; font-size: 14px; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 3px 0; }
+.stat b { color: #ffd94b; }
+#rank-ladder { font-size: 14px; line-height: 1.8; }
+#rank-ladder .cur { color: #ffd94b; font-weight: bold; }
+#rank-ladder .done { color: #7ae88a; }
+.crewrow { font-size: 14px; padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.crewrow span { color: #ccc; margin-left: 8px; }
+#save-slots { display: flex; flex-direction: column; gap: 8px; }
+.overlay { position: fixed; inset: 0; z-index: 25; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(60, 8, 8, 0.55); }
+.overlay h1 { font-family: Impact, sans-serif; font-size: 84px; letter-spacing: 8px; color: #d92e3a; margin: 0; text-shadow: 0 6px 20px #000; }
+#busted-overlay { background: rgba(10, 16, 50, 0.55); }
+#busted-overlay h1 { color: #7aa2ff; }
+.overlay p { font-size: 16px; }
+@media (max-width: 900px) { #logotype { font-size: 56px; } #minimap { width: 150px; height: 150px; } #controls-hint { display: none; } #dialogue-box { left: 170px; } }
